@@ -1,13 +1,12 @@
 # Import python packages
 import streamlit as st
 import snowflake.connector
-from snowflake.snowpark.context import get_active_session
 
 # Write directly to the app
 st.title("Zena's Amazing Athleisure Catalog")
 
 # Get the current credentials
-session = get_active_session()
+session = cnx.session()
 
 colors_dataframe = session.sql("SELECT COLOR_OR_STYLE from ZENAS_ATHLEISURE_DB.products.catalog_for_website").collect()
 selected_color = st.selectbox("Pick a sweatsuit color or style:", colors_dataframe)
